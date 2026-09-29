@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnóstico & Planejamento Financeiro</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Diagnóstico Financeiro & Regra 50-30-20</h1>
+      <div class="month-selector">
+        <label for="monthPicker">Mês:</label>
+        <input type="month" id="monthPicker">
+      </div>
+    </header>
+
+    <div class="grid-top">
+      <!-- Card 1: Salário e Vazamento -->
+      <div class="card">
+        <h2>Renda Líquida</h2>
+        <label for="salaryInput">Salário Mensal (R$)</label>
+        <div class="input-group">
+          <span>R$</span>
+          <input type="number" id="salaryInput" placeholder="0,00" min="0" step="0.01">
+        </div>
+
+        <div class="leak-section">
+          <h2>Detecção de Desvios</h2>
+          <div class="metric-box leak-card">
+            <p>Maior Despesa Individual</p>
+            <strong id="biggestExpenseTxt">-</strong>
+          </div>
+          <div class="metric-box leak-card">
+            <p>Excesso Acima do Teto (50/30)</p>
+            <strong id="leakAmountTxt">R$ 0,00</strong>
+            <p id="leakDetailTxt">Aguardando processamento.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Comparativo 50-30-20 -->
+      <div class="card">
+        <h2>Divisão Atual (50-30-20)</h2>
+        
+        <div class="summary-bar">
+          <div class="bar-info">
+            <span>Essenciais (Teto: 50%)</span>
+            <span id="labelEss">R$ 0,00 (0%)</span>
+          </div>
+          <div class="progress-track">
+            <div id="barEss" class="progress-fill fill-essential"></div>
+          </div>
+        </div>
+
+        <div class="summary-bar">
+          <div class="bar-info">
+            <span>Desejos Pessoais (Teto: 30%)</span>
+            <span id="labelLife">R$ 0,00 (0%)</span>
+          </div>
+          <div class="progress-track">
+            <div id="barLife" class="progress-fill fill-lifestyle"></div>
+          </div>
+        </div>
+
+        <div class="summary-bar">
+          <div class="bar-info">
+            <span>Investimentos (Meta: 20%)</span>
+            <span id="labelInv">R$ 0,00 (0%)</span>
+          </div>
+          <div class="progress-track">
+            <div id="barInv" class="progress-fill fill-invest"></div>
+          </div>
+        </div>
+
+        <div class="charts-wrapper">
+          <canvas id="gaugeChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Card 3: Metas Patrimoniais -->
+      <div class="card">
+        <h2>Metas & Liberdade</h2>
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <p>Teto Despesas Fixas (50%)</p>
+            <strong id="targetFixed">R$ 0,00</strong>
+          </div>
+          <div class="metric-box">
+            <p>Para Passar o Mês (30%)</p>
+            <strong id="targetLife">R$ 0,00</strong>
+          </div>
+          <div class="metric-box">
+            <p>Investimento Mensal (20%)</p>
+            <strong id="targetInvest">R$ 0,00</strong>
+          </div>
+          <div class="metric-box">
+            <p>Reserva Emergência (6x)</p>
+            <strong id="targetReserve">R$ 0,00</strong>
+          </div>
+          <div class="metric-box metric-freedom">
+            <p>Para Viver de Renda (120x)</p>
+            <strong id="targetFreedom">R$ 0,00</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção do Parecer Técnico -->
+    <div id="feedbackContainer" class="card feedback-card hidden">
+      <h2 id="feedbackTitle">Parecer do Planejamento</h2>
+      <p id="feedbackText" class="feedback-body"></p>
+    </div>
+
+    <!-- Lista de Despesas e Botões de Ação -->
+    <div class="card">
+      <div class="action-header">
+        <h2>Despesas Mensais</h2>
+        <button id="btnCalculate" class="btn-primary">⚡ Processar Diagnóstico Financeiro</button>
+      </div>
+      <div class="expense-list" id="expenseContainer"></div>
+      <button class="btn-add" id="btnAddExpense">+ Adicionar Despesa Customizada</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
